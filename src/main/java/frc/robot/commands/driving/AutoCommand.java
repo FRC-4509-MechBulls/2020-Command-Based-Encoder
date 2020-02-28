@@ -45,6 +45,6 @@ public class AutoCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.get() > 5;  // end the command if we have run for at least 2 seconds
+    return timer.get() > 3;  // end the command if we have run for at least 3 seconds
   }
 }

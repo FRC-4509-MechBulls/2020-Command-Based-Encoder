@@ -32,7 +32,7 @@ public class ShooterOnCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeAndShootSubsystem.enable(0.0,-1.0); 
+    intakeAndShootSubsystem.enable(0.0,-.95); 
   }
 
   // Called once the command ends or is interrupted.
