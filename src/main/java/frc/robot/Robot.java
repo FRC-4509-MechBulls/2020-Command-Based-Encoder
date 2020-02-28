@@ -112,6 +112,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    cannonTiltSubsystem.init();
+
     CommandScheduler.getInstance().run();
 
     // auto.schedule();
@@ -151,7 +153,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopInit() {
-    cannonTiltSubsystem.init();
 
     // TODO Auto-generated method stub
     super.teleopInit();
