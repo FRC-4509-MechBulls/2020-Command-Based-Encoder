@@ -45,7 +45,7 @@ public class AutoCommand extends CommandBase {
       intakeAndShootSubsystem.enable(0.0, -.95);
       intakeAndShootSubsystem.index(-1.0);
     }
-    DrivingSubsystem.drive.arcadeDrive(.5, 0);// drive straight at half
+    DrivingSubsystem.drive.arcadeDrive(-.75, 0);// drive backwards at 3/4 speed
   }
 
   // Called once the command ends or is interrupted.
