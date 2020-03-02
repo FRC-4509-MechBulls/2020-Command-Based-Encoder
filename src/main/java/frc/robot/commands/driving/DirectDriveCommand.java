@@ -11,15 +11,15 @@ public class DirectDriveCommand extends CommandBase {
 	// private DrivingSubsystem dSub = new DrivingSubsystem();
 	private final DrivingSubsystem dSub;
 
-	private final DoubleSupplier forward;
-	private final DoubleSupplier rotation;
+	private final DoubleSupplier left;
+	private final DoubleSupplier right;
 
 
-	public DirectDriveCommand(DrivingSubsystem subsystem, DoubleSupplier forward, DoubleSupplier rotation) {
+	public DirectDriveCommand(DrivingSubsystem subsystem, DoubleSupplier left, DoubleSupplier right) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		dSub = subsystem;
-		this.forward = forward;
-		this.rotation = rotation;
+		this.left = left;
+		this.right = right;
 		addRequirements(dSub);
 	}
 
@@ -29,7 +29,7 @@ public class DirectDriveCommand extends CommandBase {
 	}
 
 	public void execute() {
-		dSub.drive(forward.getAsDouble(), rotation.getAsDouble()); // Use input directly from the controller
+		dSub.drive(left.getAsDouble(), right.getAsDouble()); // Use input directly from the controller
 	}
 
 	public boolean isFinished() {
