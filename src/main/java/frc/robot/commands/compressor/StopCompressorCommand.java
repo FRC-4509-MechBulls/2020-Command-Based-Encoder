@@ -5,19 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.compressor;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.PnuematicSubsytem;
+import frc.robot.subsystems.PnuematicSubsystem;
 
-public class StartCompressorCommand extends CommandBase {
+public class StopCompressorCommand extends CommandBase {
   /**
    * Creates a new CompressorCommand.
    */
-  PnuematicSubsytem pnuematicSubsytem;
-  public StartCompressorCommand(PnuematicSubsytem pnuematicSubsytem) {
-    this.pnuematicSubsytem = pnuematicSubsytem;
-    addRequirements(this.pnuematicSubsytem);
+  PnuematicSubsystem pnuematicSubsystem;
+
+  public StopCompressorCommand(PnuematicSubsystem pnuematicSubsystem) {
+    this.pnuematicSubsystem = pnuematicSubsystem;
+    addRequirements(this.pnuematicSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -28,7 +29,7 @@ public class StartCompressorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pnuematicSubsytem.enable();
+    pnuematicSubsystem.disable();
   }
 
   // Called once the command ends or is interrupted.

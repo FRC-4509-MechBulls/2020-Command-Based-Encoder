@@ -3,8 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.StartCompressorCommand;
-import frc.robot.commands.StopCompressorCommand;
+import frc.robot.commands.compressor.StartCompressorCommand;
+import frc.robot.commands.compressor.StopCompressorCommand;
 import frc.robot.commands.climber.ClimberCommand;
 import frc.robot.commands.climber.TurnOffClimberCommand;
 import frc.robot.commands.driving.DirectDriveCommand;
@@ -27,7 +27,7 @@ import frc.robot.subsystems.CannonTiltSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivingSubsystem;
 import frc.robot.subsystems.IntakeAndShootSubsystem;
-import frc.robot.subsystems.PnuematicSubsytem;
+import frc.robot.subsystems.PnuematicSubsystem;
 import frc.robot.subsystems.WomfSubsystem;
 
 
@@ -39,7 +39,7 @@ public class RobotContainer {
    
     DrivingSubsystem drivingSubsystem = new DrivingSubsystem();
     ClimberSubsystem climberSubsystem = new ClimberSubsystem();
-    PnuematicSubsytem pnuematicSubsytem = new PnuematicSubsytem();
+    PnuematicSubsystem pnuematicSubsystem = new PnuematicSubsystem();
     IntakeAndShootSubsystem intakeAndShootSubsystem = new IntakeAndShootSubsystem();
     WomfSubsystem womfSubsystem = new WomfSubsystem();
     CannonTiltSubsystem cannonTiltSubsystem = new CannonTiltSubsystem();
@@ -97,8 +97,8 @@ public class RobotContainer {
         indexerIntake.whenReleased(new StopIndexCommand(intakeAndShootSubsystem));
         indexerShoot.whenPressed(new IndexShooterCommand(intakeAndShootSubsystem));
         indexerShoot.whenReleased(new StopIndexCommand(intakeAndShootSubsystem));
-        compressorButton.whenPressed(new StartCompressorCommand(pnuematicSubsytem));
-        compressorButton.whenReleased(new StopCompressorCommand(pnuematicSubsytem));
+        compressorButton.whenPressed(new StartCompressorCommand(pnuematicSubsystem));
+        compressorButton.whenReleased(new StopCompressorCommand(pnuematicSubsystem));
 
     }
   

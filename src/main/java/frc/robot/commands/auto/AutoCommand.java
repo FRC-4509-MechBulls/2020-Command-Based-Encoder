@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.driving;
+package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -34,6 +34,7 @@ public class AutoCommand extends CommandBase {
     addRequirements(drivingSubsystem);
     addRequirements(cannonTiltSubsystem);
     addRequirements(intakeAndShootSubsystem);
+
     timer = new Timer();
   }
 
@@ -48,21 +49,29 @@ public class AutoCommand extends CommandBase {
   @Override
   public void execute() {
     // SequentialCommandGroup shootingGroup = new SequentialCommandGroup(
-    //     new ShooterOnCommand(intakeAndShootSubsystem));
-  
-    // intakeAndShootSubsystem.enable(0.0, -1);
+    //     new CannonShootMode(cannonTiltSubsystem).andThen(new ShooterOnCommand(intakeAndShootSubsystem)));
 
     // SequentialCommandGroup shootingGroup = new SequentialCommandGroup(
-    // new CannonShootMode(cannonTiltSubsystem).andThen(new
-    // ShooterOnCommand(intakeAndShootSubsystem)));
+    // new ShooterOnCommand(intakeAndShootSubsystem));
 
-    // // cannonTiltSubsystem.shootMode().andThen(new
-    // // ShooterOnCommand(intakeAndShootSubsystem));
+    // intakeAndShootSubsystem.enable(0.0, -1);
+
+    if (timer.get() < 10) {
+      cannonTiltSubsystem.shootMode();
+      intakeAndShootSubsystem.enable(0.0,-.95);
+
+
+    }
+    if(timer.get() >2 && timer.get() < 10){
+      intakeAndShootSubsystem.index(-1.0);
+    }
+
     // // while (timer.get() < 8) {
     // shootingGroup.execute();
     // // }
-
-    drivingSubsystem.drive.arcadeDrive(.5, 0);// drive straight at half
+    if (timer.get() > 10) {
+      drivingSubsystem.drive.arcadeDrive(.5, 0);// drive straight at half
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -73,6 +82,6 @@ public class AutoCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.get() > 3; // end the command if we have run for at least 3 seconds
+    return timer.get() > 14; // end the command if we have run for at least 14 seconds
   }
 }
