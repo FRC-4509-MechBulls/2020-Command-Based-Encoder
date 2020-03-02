@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -23,11 +24,11 @@ public class Constants {
 	public static final int LEFT_BACK_DRIVE_TALON_PORT   = 6;
 	public static final int RIGHT_FRONT_DRIVE_TALON_PORT = 11;
 	public static final int RIGHT_BACK_DRIVE_TALON_PORT  = 2;
-	public static final double baseDriveSpeed = 0.90;
+	public static final double baseDriveSpeed = 1.0;
 
 	public static final int XBOX_CONTROLLER_1_PORT = 0;
     public static final int XBOX_CONTROLLER_2_PORT = 1;
-	public static final int CLIMBER_SOLENOID_PORT = 0;
+	public static final int CLIMBER_SOLENOID_PORT = 4;
 	public static final int INTAKE_SOLENOID_PORT =3;
 	public static Solenoid climberSolenoid = new Solenoid(CLIMBER_SOLENOID_PORT);
 	public static Solenoid intakeSolenoid = new Solenoid(INTAKE_SOLENOID_PORT);
@@ -51,8 +52,7 @@ public class Constants {
 	public static final double kDShoot = 0.04;
 	public static final double iLimitShoot = 1;
 
-	
-
+	public static final Compressor robotCompressor = new Compressor();
 
 	
 

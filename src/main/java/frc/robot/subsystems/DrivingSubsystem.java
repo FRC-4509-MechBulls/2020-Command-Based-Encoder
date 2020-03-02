@@ -25,17 +25,17 @@ public class DrivingSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
-	public void drive(double ySpeed, double rotation) {
+	public void drive(double leftSpeed, double rightSpeed) {
 
-		// if (Math.abs(ySpeed) > 1)
-		// 	ySpeed = Math.abs(ySpeed) / ySpeed; // if the value given was too high, set it to the max
-		// ySpeed *= baseDriveSpeed; // scale down the speed
+		if (Math.abs(leftSpeed) > 1.0)
+		leftSpeed = Math.abs(leftSpeed) / leftSpeed; // if the value given was too high, set it to the max
+		leftSpeed *= Constants.baseDriveSpeed; // scale down the speed
 
-		// if (Math.abs(rotation) > 1)
-		// 	rotation = Math.abs(rotation) / rotation; // if the value given was too high, set it to the max
-		// rotation *= baseDriveSpeed; // scale down the speed
+		if (Math.abs(rightSpeed) > 1)
+			rightSpeed = Math.abs(rightSpeed) / rightSpeed; // if the value given was too high, set it to the max
+			rightSpeed *= Constants.baseDriveSpeed; // scale down the speed
 
-		drive.tankDrive(ySpeed, rotation); // function provided by the drivetrain. controls y and turn speed at the
+		drive.tankDrive(leftSpeed, rightSpeed); // function provided by the drivetrain. controls y and turn speed at the
 												// // same time.
 	}
 
@@ -47,10 +47,13 @@ public class DrivingSubsystem extends SubsystemBase {
 
 		leftBackDriveTalon.follow(leftFrontDriveTalon);
 		rightBackDriveTalon.follow(rightFrontDriveTalon);
-
+		leftFrontDriveTalon.configOpenloopRamp(0.5);
+		leftFrontDriveTalon.configClosedloopRamp(0.0);
+		rightFrontDriveTalon.configOpenloopRamp(0.5);
+		rightFrontDriveTalon.configClosedloopRamp(0.0);
 		drive = new DifferentialDrive(leftFrontDriveTalon, rightFrontDriveTalon);
 
-		drive.setDeadband(0);
+		drive.setDeadband(0.02);
 	}
 	public void test(){
 		// leftFrontDriveTalon.set(-0.5);

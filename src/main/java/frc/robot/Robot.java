@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.driving.AutoCommand;
 import frc.robot.subsystems.CannonTiltSubsystem;
 import frc.robot.subsystems.DrivingSubsystem;
+import frc.robot.subsystems.IntakeAndShootSubsystem;
 import frc.robot.subsystems.WomfSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -45,6 +46,7 @@ public class Robot extends TimedRobot {
 
   static RobotContainer oi = new RobotContainer();
   CannonTiltSubsystem cannonTiltSubsystem = new CannonTiltSubsystem();
+  IntakeAndShootSubsystem intakeAndShootSubsystem = new IntakeAndShootSubsystem();
   WomfSubsystem womfSubsystem = new WomfSubsystem();
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   /**
@@ -63,7 +65,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    auto = new AutoCommand(drivingSubsystem);
+    auto = new AutoCommand(drivingSubsystem, cannonTiltSubsystem, intakeAndShootSubsystem);
     auto.initialize();
     Robot.oi = new RobotContainer();
     womfSubsystem.colorMatcher.setConfidenceThreshold(1.0);
@@ -157,6 +159,7 @@ public class Robot extends TimedRobot {
     // TODO Auto-generated method stub
     super.teleopInit();
     auto.cancel();
+    
   }
   @Override
   public void teleopPeriodic() {
@@ -195,6 +198,7 @@ public class Robot extends TimedRobot {
     } else {
       // Code for no data received yet
     }
+
     CommandScheduler.getInstance().run();
 
   }
