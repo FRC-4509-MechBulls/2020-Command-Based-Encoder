@@ -47,9 +47,9 @@ public class DrivingSubsystem extends SubsystemBase {
 
 		leftBackDriveTalon.follow(leftFrontDriveTalon);
 		rightBackDriveTalon.follow(rightFrontDriveTalon);
-		leftFrontDriveTalon.configOpenloopRamp(0.5);
+		leftFrontDriveTalon.configOpenloopRamp(2.0);
 		leftFrontDriveTalon.configClosedloopRamp(0.0);
-		rightFrontDriveTalon.configOpenloopRamp(0.5);
+		rightFrontDriveTalon.configOpenloopRamp(2.0);
 		rightFrontDriveTalon.configClosedloopRamp(0.0);
 		drive = new DifferentialDrive(leftFrontDriveTalon, rightFrontDriveTalon);
 

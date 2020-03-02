@@ -123,9 +123,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
   public void stop(){
     cannonMotor.set(0.0);
   }
-  public void test(){
-    cannonMotor.set(-.35);
-  }
+
   // @Override
   // public void periodic() {
   //   // This method will be called once per scheduler run
