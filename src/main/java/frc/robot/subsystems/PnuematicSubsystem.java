@@ -10,11 +10,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class PnuematicSubsytem extends SubsystemBase {
+public class PnuematicSubsystem extends SubsystemBase {
   /**
    * Creates a new PnuematicSubsytem.
    */
-  public PnuematicSubsytem() {
+  public PnuematicSubsystem() {
 
   }
 
