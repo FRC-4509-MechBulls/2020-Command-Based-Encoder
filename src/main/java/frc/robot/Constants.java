@@ -32,7 +32,7 @@ public class Constants {
 	public static final int INTAKE_SOLENOID_PORT =3;
 	public static Solenoid climberSolenoid = new Solenoid(CLIMBER_SOLENOID_PORT);
 	public static Solenoid intakeSolenoid = new Solenoid(INTAKE_SOLENOID_PORT);
-	public static final double kCannonTick2Deg = 360.0 / 512 * 26 / 42 * 18 / 60 * 18 / 84;
+	public static final double kCannonTick2Deg = 360/1024;
 	public static final double kPWomf = 0.04;
     public static final double kIWomf = 0.04;
     public static final double kDWomf = 0.5;
@@ -47,9 +47,9 @@ public class Constants {
     public static double errorSumShoot = 0;
     public static double lastTimestampShoot = 0;
     public static double lastErrorShoot = 0;
-	public static final double kPShoot = 0.04;
-    public static final double kIShoot = 0.04;
-	public static final double kDShoot = 0.04;
+	public static double kPShoot = 0.0;
+    public static final double kIShoot = 0.001;
+	public static double kDShoot = 0.0;
 	public static final double iLimitShoot = 1;
 
 	public static final Compressor robotCompressor = new Compressor();

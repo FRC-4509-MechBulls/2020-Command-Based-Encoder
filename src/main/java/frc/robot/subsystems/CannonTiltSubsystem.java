@@ -26,6 +26,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
   public CannonTiltSubsystem() {
 
   }
+
   public void init(){
     errorSum = 0;
     lastError = 0;
@@ -52,13 +53,15 @@ public class CannonTiltSubsystem extends SubsystemBase {
     // Constants.setpointShoot = 25;
     Constants.setpointShoot = -14;
 
-    double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
+    double sensorPosition = cannonMotor.getSelectedSensorPosition(0);
     double error = Constants.setpointShoot - sensorPosition;
     double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
     if (Math.abs(error) < Constants.iLimitShoot) {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
+    Constants.kPShoot = (.1*1024)/error;
+    Constants.kDShoot = Constants.kPShoot * 10;
     double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
@@ -69,7 +72,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
     
     // Constants.setpointWomf = 6;
     // Constants.setpointShoot = 25;
-    Constants.setpointShoot = 0.1;
+    Constants.setpointShoot = 0.1 * Constants.kCannonTick2Deg;
 
     double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
     double error = Constants.setpointShoot - sensorPosition;
@@ -78,6 +81,8 @@ public class CannonTiltSubsystem extends SubsystemBase {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
+    Constants.kPShoot = (.1*1024)/error;
+    Constants.kDShoot = Constants.kPShoot * 10;
     double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
@@ -87,7 +92,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
 
   public void womfMode(){
 
-      Constants.setpointShoot = -15;
+      Constants.setpointShoot = -15 * Constants.kCannonTick2Deg;
 
       double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
       double error = Constants.setpointShoot - sensorPosition;
@@ -96,6 +101,8 @@ public class CannonTiltSubsystem extends SubsystemBase {
         Constants.errorSumShoot += error * dt;
       }
       double errorRate = (error - Constants.lastErrorShoot) / dt;
+      Constants.kPShoot = (.1*1024)/error;
+      Constants.kDShoot = Constants.kPShoot * 10;
       double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
       cannonMotor.set(-outputSpeed);
       Constants.lastTimestampShoot = Timer.getFPGATimestamp();
@@ -105,7 +112,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
    
   
   public void setIntake(){
-    Constants.setpointShoot = -50;
+    Constants.setpointShoot = -50 * Constants.kCannonTick2Deg;
 
     double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
     double error = Constants.setpointShoot - sensorPosition;
@@ -114,7 +121,9 @@ public class CannonTiltSubsystem extends SubsystemBase {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
-    double outputSpeed = 0.5*(Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate);
+    Constants.kPShoot = (.1*1024)/error;
+    Constants.kDShoot = Constants.kPShoot * 10;
+    double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
     Constants.lastErrorShoot = error;

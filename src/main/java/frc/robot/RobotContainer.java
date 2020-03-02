@@ -21,8 +21,6 @@ import frc.robot.commands.tilt.CannonWomfMode;
 import frc.robot.commands.tilt.StopTiltCommand;
 import frc.robot.commands.womf.ActiveColorCommand;
 import frc.robot.commands.womf.InactiveColorCommand;
-import frc.robot.commands.womf.ServoSetBackCommand;
-import frc.robot.commands.womf.ServoSetCommand;
 import frc.robot.subsystems.CannonTiltSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivingSubsystem;
