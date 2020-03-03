@@ -94,7 +94,7 @@ public class RobotContainer {
         cannonIntake.whenPressed(new IntakeCommand(intakeAndShootSubsystem));
         cannonIntake.whenReleased(new StopTiltCommand(cannonTiltSubsystem).alongWith(new IntakeOffCommand(intakeAndShootSubsystem)));
         indexerIntake.whenPressed(new IndexIntakeCommand(intakeAndShootSubsystem));
-        indexerIntake.whenReleased(new StopIndexCommand(intakeAndShootSubsystem));
+       // indexerIntake.whenReleased(new StopIndexCommand(intakeAndShootSubsystem));
         indexerShoot.whenPressed(new IndexShooterCommand(intakeAndShootSubsystem));
         indexerShoot.whenReleased(new StopIndexCommand(intakeAndShootSubsystem));
         compressorButton.whenPressed(new StartCompressorCommand(pnuematicSubsystem));
