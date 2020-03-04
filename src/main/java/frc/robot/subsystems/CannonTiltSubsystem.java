@@ -60,8 +60,6 @@ public class CannonTiltSubsystem extends SubsystemBase {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
-    Constants.kPShoot = (.1*1024)/error;
-    Constants.kDShoot = Constants.kPShoot * 10;
     double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
@@ -81,8 +79,6 @@ public class CannonTiltSubsystem extends SubsystemBase {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
-    Constants.kPShoot = (.1*1024)/error;
-    Constants.kDShoot = Constants.kPShoot * 10;
     double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
@@ -101,8 +97,6 @@ public class CannonTiltSubsystem extends SubsystemBase {
         Constants.errorSumShoot += error * dt;
       }
       double errorRate = (error - Constants.lastErrorShoot) / dt;
-      Constants.kPShoot = (.1*1024)/error;
-      Constants.kDShoot = Constants.kPShoot * 10;
       double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
       cannonMotor.set(-outputSpeed);
       Constants.lastTimestampShoot = Timer.getFPGATimestamp();
@@ -121,8 +115,6 @@ public class CannonTiltSubsystem extends SubsystemBase {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
-    Constants.kPShoot = (.1*1024)/error;
-    Constants.kDShoot = Constants.kPShoot * 10;
     double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
