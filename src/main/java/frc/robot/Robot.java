@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
 
@@ -24,8 +23,8 @@ import frc.robot.commands.auto.AutoCommand;
 import frc.robot.subsystems.CannonTiltSubsystem;
 import frc.robot.subsystems.DrivingSubsystem;
 import frc.robot.subsystems.IntakeAndShootSubsystem;
+import frc.robot.subsystems.PnuematicSubsystem;
 import frc.robot.subsystems.WomfSubsystem;
-import edu.wpi.first.wpilibj.Timer;
 
 
 /**
@@ -38,6 +37,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   public static final DrivingSubsystem drivingSubsystem = new DrivingSubsystem();
+  public static final PnuematicSubsystem pnuematicSubsystem = new PnuematicSubsystem();
   private static final String kCustomAuto = "My Auto";
   private final Timer m_timer = new Timer();
   Command auto;
@@ -163,7 +163,7 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void teleopPeriodic() {
-    
+    pnuematicSubsystem.enable();
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
     if (gameData.length() > 0) {

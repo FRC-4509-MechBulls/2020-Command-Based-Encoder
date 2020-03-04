@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -44,12 +45,15 @@ public class DrivingSubsystem extends SubsystemBase {
 		leftBackDriveTalon = new WPI_TalonSRX(Constants.LEFT_BACK_DRIVE_TALON_PORT);
 		rightFrontDriveTalon = new WPI_TalonSRX(Constants.RIGHT_FRONT_DRIVE_TALON_PORT);
 		rightBackDriveTalon = new WPI_TalonSRX(Constants.RIGHT_BACK_DRIVE_TALON_PORT);
-
+		leftBackDriveTalon.setNeutralMode(NeutralMode.Brake);
+		leftFrontDriveTalon.setNeutralMode(NeutralMode.Brake);
+		rightBackDriveTalon.setNeutralMode(NeutralMode.Brake);
+		rightFrontDriveTalon.setNeutralMode(NeutralMode.Brake);
 		leftBackDriveTalon.follow(leftFrontDriveTalon);
 		rightBackDriveTalon.follow(rightFrontDriveTalon);
-		leftFrontDriveTalon.configOpenloopRamp(2.0);
+		leftFrontDriveTalon.configOpenloopRamp(1.0);
 		leftFrontDriveTalon.configClosedloopRamp(0.0);
-		rightFrontDriveTalon.configOpenloopRamp(2.0);
+		rightFrontDriveTalon.configOpenloopRamp(1.0);
 		rightFrontDriveTalon.configClosedloopRamp(0.0);
 		drive = new DifferentialDrive(leftFrontDriveTalon, rightFrontDriveTalon);
 

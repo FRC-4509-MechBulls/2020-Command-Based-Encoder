@@ -7,6 +7,7 @@
 
 package frc.robot.commands.index;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeAndShootSubsystem;
 
@@ -15,6 +16,7 @@ public class IndexIntakeCommand extends CommandBase {
    * Creates a new IndexIntakeCommand.
    */
   IntakeAndShootSubsystem intakeAndShootSubsystem;
+  DigitalInput irSensor = new DigitalInput(0);
   public IndexIntakeCommand(IntakeAndShootSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     intakeAndShootSubsystem = subsystem;
@@ -29,7 +31,11 @@ public class IndexIntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeAndShootSubsystem.index(1.0);
+    if(irSensor.get()){
+    intakeAndShootSubsystem.index(1.0);}
+    else if(!irSensor.get()){
+      intakeAndShootSubsystem.index(0.0);
+    }
   }
 
   // Called once the command ends or is interrupted.
