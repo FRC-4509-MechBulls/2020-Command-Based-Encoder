@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
 
@@ -26,7 +25,6 @@ import frc.robot.subsystems.DrivingSubsystem;
 import frc.robot.subsystems.IntakeAndShootSubsystem;
 import frc.robot.subsystems.PnuematicSubsystem;
 import frc.robot.subsystems.WomfSubsystem;
-import edu.wpi.first.wpilibj.Timer;
 
 
 /**
