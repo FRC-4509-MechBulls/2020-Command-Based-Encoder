@@ -27,7 +27,7 @@ public class RobotContainer {
     //public XboxController1 controller1;
     Joystick joshJoystick = new Joystick(2);
     // XboxController controller1 = new XboxController(Constants.XBOX_CONTROLLER_1_PORT);
-    Joystick zachRighJoystick = new Joystick(0);
+    Joystick zachRightJoystick = new Joystick(0);
     Joystick zachLeftJoystick = new Joystick(1);
 
     DrivingSubsystem drivingSubsystem = new DrivingSubsystem();
@@ -48,12 +48,10 @@ public class RobotContainer {
     }
 
     public double getRightDrive() {
-        return zachRighJoystick.getY();
-		// return Math.abs(n) < 0.1 ? 0 : n;
+        return zachRightJoystick.getY();
     }
     public double getLeftDrive() {
 		return zachLeftJoystick.getY();
-		// return Math.abs(n) < 0.1 ? 0 : n;
 	}
 
 
