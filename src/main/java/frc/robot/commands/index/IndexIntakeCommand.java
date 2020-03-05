@@ -32,10 +32,10 @@ public class IndexIntakeCommand extends CommandBase {
   @Override
   public void execute() {
     if(irSensor.get()){
-    intakeAndShootSubsystem.index(1.0);}
-    else if(!irSensor.get()){
-      intakeAndShootSubsystem.index(0.0);
-    }
+      intakeAndShootSubsystem.index(0.0);}
+      else if(!irSensor.get()){
+        intakeAndShootSubsystem.index(1.0);
+      }
   }
 
   // Called once the command ends or is interrupted.
