@@ -52,7 +52,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
     // Constants.setpointShoot = 25;
     Constants.setpointShoot = -14;
 
-    double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
+    double sensorPosition = cannonMotor.getSelectedSensorPosition(0);
     double error = Constants.setpointShoot - sensorPosition;
     double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
     if (Math.abs(error) < Constants.iLimitShoot) {
@@ -71,7 +71,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
     // Constants.setpointShoot = 25;
     Constants.setpointShoot = 0.1;
 
-    double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
+    double sensorPosition = cannonMotor.getSelectedSensorPosition(0);
     double error = Constants.setpointShoot - sensorPosition;
     double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
     if (Math.abs(error) < Constants.iLimitShoot) {
@@ -89,7 +89,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
 
       Constants.setpointShoot = -15;
 
-      double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
+      double sensorPosition = cannonMotor.getSelectedSensorPosition(0);
       double error = Constants.setpointShoot - sensorPosition;
       double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
       if (Math.abs(error) < Constants.iLimitShoot) {
@@ -107,7 +107,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
   public void setIntake(){
     Constants.setpointShoot = -50;
 
-    double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
+    double sensorPosition = cannonMotor.getSelectedSensorPosition(0);
     double error = Constants.setpointShoot - sensorPosition;
     double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
     if (Math.abs(error) < Constants.iLimitShoot) {
