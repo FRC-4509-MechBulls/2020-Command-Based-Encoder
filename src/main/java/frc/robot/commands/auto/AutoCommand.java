@@ -49,30 +49,30 @@ public class AutoCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // SequentialCommandGroup shootingGroup = new SequentialCommandGroup(
-    //     new CannonShootMode(cannonTiltSubsystem).andThen(new ShooterOnCommand(intakeAndShootSubsystem).andThen(new IndexShooterCommand(intakeAndShootSubsystem))));
+    SequentialCommandGroup shootingGroup = new SequentialCommandGroup(
+        new CannonShootMode(cannonTiltSubsystem).alongWith(new ShooterAutoCommand(intakeAndShootSubsystem).andThen(new IndexShooterCommand(intakeAndShootSubsystem))));
 
     // SequentialCommandGroup shootingGroup = new SequentialCommandGroup(
     // new ShooterOnCommand(intakeAndShootSubsystem));
 
     // intakeAndShootSubsystem.enable(0.0, -1);
-    // shootingGroup.execute();
-    if (timer.get() < 10) {
-      cannonTiltSubsystem.shootMode();
-      intakeAndShootSubsystem.enable(0.0,-.95);
+    shootingGroup.execute();
+    // if (timer.get() < 10) {
+    //   cannonTiltSubsystem.shootMode();
+    //   intakeAndShootSubsystem.enable(0.0,-.95);
 
 
-    }
-    if(timer.get() >2 && timer.get() < 10){
-      intakeAndShootSubsystem.index(-1.0);
-    }
+    // }
+    // if(timer.get() >2 && timer.get() < 10){
+    //   intakeAndShootSubsystem.index(-1.0);
+    // }
 
-    // // while (timer.get() < 8) {
-    // shootingGroup.execute();
-    // // }
-    if (timer.get() > 10) {
-      drivingSubsystem.drive.arcadeDrive(.5, 0);// drive straight at half
-    }
+    // // // while (timer.get() < 8) {
+    // // shootingGroup.execute();
+    // // // }
+    // if (timer.get() > 10) {
+    //   drivingSubsystem.drive.arcadeDrive(.5, 0);// drive straight at half
+    // }
   }
 
   // Called once the command ends or is interrupted.
