@@ -134,6 +134,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    
+
+
+
+    
+
+
+
     CommandScheduler.getInstance().run();
     if(auto.isFinished() == true){
       auto.cancel();
@@ -163,6 +171,10 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void teleopPeriodic() {
+    // if(Constants.limitSwitch.get()){
+    //   // System.out.println("it is true");
+    //   // cannonTiltSubsystem.init();
+    // }
     pnuematicSubsystem.enable();
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();

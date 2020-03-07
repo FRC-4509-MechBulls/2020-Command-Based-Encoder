@@ -20,14 +20,13 @@ public class CannonTiltSubsystem extends SubsystemBase {
    * Creates a new CannonTiltSubsystem.
    */
   public static WPI_TalonSRX cannonMotor = new WPI_TalonSRX(15);
-  double errorSum = 0;
   double lastTimestamp = 0;
   double lastError = 0;
   public CannonTiltSubsystem() {
 
   }
   public void init(){
-    errorSum = 0;
+    Constants.errorSumShoot = 0;
     lastError = 0;
     lastTimestamp = Timer.getFPGATimestamp();
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -47,6 +46,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
     
   }
   public void shootMode(){
+
     
     // Constants.setpointWomf = 6;
     // Constants.setpointShoot = 25;
@@ -59,11 +59,18 @@ public class CannonTiltSubsystem extends SubsystemBase {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
-    double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
+    // + Constants.kDShoot * errorRate
+
+    double outputSpeed = Constants.kPShoot * error;
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
     Constants.lastErrorShoot = error;
-    System.out.println(sensorPosition);
+    // If error goes out of bounds, errorSum becomes 0, not tested
+    // if (error >= 1 || error <= -1) { 
+    //   Constants.errorSumShoot = 0;
+    // } 
+    System.out.println("Sensor position"+ sensorPosition);
+
   }
   public void climbMode(){
     

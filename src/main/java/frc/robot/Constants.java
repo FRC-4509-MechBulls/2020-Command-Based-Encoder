@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -47,13 +48,13 @@ public class Constants {
     public static double errorSumShoot = 0;
     public static double lastTimestampShoot = 0;
     public static double lastErrorShoot = 0;
-	public static final double kPShoot = 0.4;
-    public static final double kIShoot = 0.4;
-	public static final double kDShoot = 0.4;
+	public static final double kPShoot = 0.05;
+    public static final double kIShoot = 0.0;
+	public static final double kDShoot = 0.0;
 	public static final double iLimitShoot = 1;
 
 	public static final Compressor robotCompressor = new Compressor();
-
+	public static final DigitalInput limitSwitch = new DigitalInput(1);
 	
 
 	
