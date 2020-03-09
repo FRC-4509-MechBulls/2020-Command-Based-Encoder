@@ -38,8 +38,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
     cannonMotor.configClosedloopRamp(0.2);
     cannonMotor.configNominalOutputForward(0, 0);
     cannonMotor.configNominalOutputReverse(0, 0);
-    cannonMotor.configPeakOutputForward(1, 0);
-    cannonMotor.configPeakOutputReverse(-1, 0);
+
     cannonMotor.setSensorPhase(true);
     cannonMotor.configReverseSoftLimitThreshold((int) (0 / Constants.kTick2Feet4Womf), 10);
     cannonMotor.configForwardSoftLimitThreshold((int) (175 / Constants.kTick2Feet4Womf), 10);
@@ -112,7 +111,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
    
   
   public void setIntake(){
-    Constants.setpointShoot = -50;
+    Constants.setpointShoot = -45;
 
     double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
     double error = Constants.setpointShoot - sensorPosition;
