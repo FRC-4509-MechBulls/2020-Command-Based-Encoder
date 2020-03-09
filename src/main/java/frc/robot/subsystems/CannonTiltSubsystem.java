@@ -49,7 +49,7 @@ public class CannonTiltSubsystem extends SubsystemBase {
     
     // Constants.setpointWomf = 6;
     // Constants.setpointShoot = 25;
-    Constants.setpointShoot = -14;
+    Constants.setpointShoot = -12;
 
     double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
     double error = Constants.setpointShoot - sensorPosition;
