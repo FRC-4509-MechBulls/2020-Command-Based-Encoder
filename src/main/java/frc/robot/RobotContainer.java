@@ -73,14 +73,14 @@ public class RobotContainer {
         cannonTiltIntake.whenReleased(new StopTiltCommand(cannonTiltSubsystem));
         climbModeCannon.whenPressed(new CannonClimbMode(cannonTiltSubsystem));
         climbModeCannon.whenReleased(new StopTiltCommand(cannonTiltSubsystem));
-        cannonTiltShoot.whenPressed(new CannonShootMode(cannonTiltSubsystem));
+        // cannonTiltShoot.whenPressed(new CannonShootMode(cannonTiltSubsystem));
         indexerIntake.whenPressed(new IndexIntakeCommand(intakeAndShootSubsystem));
         indexerIntake.whenReleased(new StopIndexCommand(intakeAndShootSubsystem));
         compressor.whenPressed(new StartCompressorCommand(pnuematicSubsystem));
         compressor.whenReleased(new StopCompressorCommand(pnuematicSubsystem));
         // cannonTiltShoot.whenReleased(new StopTiltCommand(cannonTiltSubsystem));
-        cannonShoot.whenPressed(new ShooterOnCommand(intakeAndShootSubsystem));
-        cannonShoot.whenReleased(new IntakeOffCommand(intakeAndShootSubsystem));
+        cannonShoot.whenPressed(new ShooterOnCommand(intakeAndShootSubsystem).alongWith(new CannonShootMode(cannonTiltSubsystem)));
+        cannonShoot.whenReleased(new IntakeOffCommand(intakeAndShootSubsystem).alongWith(new StopTiltCommand(cannonTiltSubsystem)));
         cannonIntake.whenPressed(new IntakeCommand(intakeAndShootSubsystem));
         cannonIntake.whenReleased(new StopTiltCommand(cannonTiltSubsystem).alongWith(new IntakeOffCommand(intakeAndShootSubsystem)));
         indexerShoot.whenPressed(new IndexShooterCommand(intakeAndShootSubsystem));
