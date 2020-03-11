@@ -59,7 +59,6 @@ public class RobotContainer {
     private void configureButtonBindings() {
         //womfButton, climberButton, cannonShoot, cannonIntake, climbModeCannon, cannonTiltIntake, cannonTiltShoot
         final JoystickButton cannonTiltIntake = new JoystickButton(joshJoystick, 8);
-        final JoystickButton cannonTiltShoot = new JoystickButton(joshJoystick, 11);
         final JoystickButton climberButton = new JoystickButton(joshJoystick, 6);
         final JoystickButton climbModeCannon = new JoystickButton(joshJoystick, 12);
         final JoystickButton cannonShoot = new JoystickButton(joshJoystick, 2);
