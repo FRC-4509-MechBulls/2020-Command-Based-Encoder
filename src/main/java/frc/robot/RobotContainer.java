@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.climber.ClimberCommand;
 import frc.robot.commands.climber.TurnOffClimberCommand;
+import frc.robot.commands.compressor.StartCompressorCommand;
+import frc.robot.commands.compressor.StopCompressorCommand;
 import frc.robot.commands.driving.DirectDriveCommand;
 import frc.robot.commands.index.IndexIntakeCommand;
 import frc.robot.commands.index.IndexShooterCommand;
@@ -64,6 +66,7 @@ public class RobotContainer {
         final JoystickButton cannonIntake= new JoystickButton(joshJoystick, 7);
         final JoystickButton indexerShoot= new JoystickButton(joshJoystick, 1);
         final JoystickButton indexerIntake = new JoystickButton(joshJoystick, 9);
+        final JoystickButton compressor = new JoystickButton(zachRightJoystick, 1);
         climberButton.whenPressed(new ClimberCommand(climberSubsystem));
         climberButton.whenReleased(new TurnOffClimberCommand(climberSubsystem));
         cannonTiltIntake.whenPressed(new CannonIntakeMode(cannonTiltSubsystem));
@@ -73,6 +76,8 @@ public class RobotContainer {
         cannonTiltShoot.whenPressed(new CannonShootMode(cannonTiltSubsystem));
         indexerIntake.whenPressed(new IndexIntakeCommand(intakeAndShootSubsystem));
         indexerIntake.whenReleased(new StopIndexCommand(intakeAndShootSubsystem));
+        compressor.whenPressed(new StartCompressorCommand(pnuematicSubsystem));
+        compressor.whenReleased(new StopCompressorCommand(pnuematicSubsystem));
         // cannonTiltShoot.whenReleased(new StopTiltCommand(cannonTiltSubsystem));
         cannonShoot.whenPressed(new ShooterOnCommand(intakeAndShootSubsystem));
         cannonShoot.whenReleased(new IntakeOffCommand(intakeAndShootSubsystem));

@@ -24,12 +24,8 @@ public class PnuematicSubsystem extends SubsystemBase {
   }
 
   public void enable() {
-    if(Constants.robotCompressor.getPressureSwitchValue()){
       Constants.robotCompressor.start();
-    } else{
-      Constants.robotCompressor.stop();
 
-    }
   }
 
   public void disable() {
