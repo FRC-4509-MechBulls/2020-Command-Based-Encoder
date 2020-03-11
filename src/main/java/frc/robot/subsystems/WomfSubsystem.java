@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
-import com.revrobotics.ColorSensorV3;
+//import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Servo;
@@ -30,11 +30,11 @@ public class WomfSubsystem extends SubsystemBase {
   public static Servo womfServo = new Servo(0); //PWM Port on roboRio
   IntakeAndShootSubsystem intakeAndShootSubsystem = new IntakeAndShootSubsystem();
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
+  //private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
 
   public final ColorMatch colorMatcher = new ColorMatch();
-  Color detectedColor = colorSensor.getColor();
-  double IR = colorSensor.getIR();
+  //Color detectedColor = colorSensor.getColor();
+  //double IR = colorSensor.getIR();
 
   /**
    * Note: Any example colors should be calibrated as the user needs, these are
@@ -66,29 +66,29 @@ public class WomfSubsystem extends SubsystemBase {
   }
   public void stage2() {
 
-    Color detectedColor = colorSensor.getColor();
-    int proximity = colorSensor.getProximity();
+    //Color detectedColor = colorSensor.getColor();
+    //int proximity = colorSensor.getProximity();
 
     /**
      * Run the color match algorithm on our detected color
      */
     String colorString;
-    ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
+    //ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
 
-    colorMatcher.matchClosestColor(detectedColor);
+    //colorMatcher.matchClosestColor(detectedColor);
     // for targetColor, in gamedata in setup type B, Y, R, G for the colors it needs
     // to detect
-    if (match.color == targetColor) {
-      intakeAndShootSubsystem.flywheel1.set(0);
-      stop = true;
+    //if (match.color == targetColor) {
+     // intakeAndShootSubsystem.flywheel1.set(0);
+     // stop = true;
 
-    } else if (match.color != targetColor) {
-      intakeAndShootSubsystem.flywheel1.set(0.2);
-      if (stop) {
-        intakeAndShootSubsystem.flywheel1.set(0.0);
-      }
+    //} else if (match.color != targetColor) {
+      //intakeAndShootSubsystem.flywheel1.set(0.2);
+      //if (stop) {
+       // intakeAndShootSubsystem.flywheel1.set(0.0);
+      //}
 
-    }
+    //}
 
   }
 
