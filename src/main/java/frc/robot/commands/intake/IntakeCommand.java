@@ -37,7 +37,7 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeAndShootSubsystem.enable(1.0,0.6); 
+    intakeAndShootSubsystem.enable(1.0,0.8); 
  
 
   }

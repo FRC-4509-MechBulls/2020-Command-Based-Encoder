@@ -44,12 +44,39 @@ public class CannonTiltSubsystem extends SubsystemBase {
     cannonMotor.configForwardSoftLimitThreshold((int) (175 / Constants.kTick2Feet4Womf), 10);
     
   }
-  public void shootMode(){
+  public void shootModeAuto(){
 
     
     // Constants.setpointWomf = 6;
     // Constants.setpointShoot = 25;
     Constants.setpointShoot = -15;
+
+    double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
+    double error = Constants.setpointShoot - sensorPosition;
+    double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
+    if (Math.abs(error) < Constants.iLimitShoot) {
+      Constants.errorSumShoot += error * dt;
+    }
+    double errorRate = (error - Constants.lastErrorShoot) / dt;
+    // + Constants.kDShoot * errorRate
+
+    double outputSpeed = 0.75*(Constants.kPShoot * error);
+    cannonMotor.set(-outputSpeed);
+    Constants.lastTimestampShoot = Timer.getFPGATimestamp();
+    Constants.lastErrorShoot = error;
+    // If error goes out of bounds, errorSum becomes 0, not tested
+    // if (error >= 1 || error <= -1) { 
+    //   Constants.errorSumShoot = 0;
+    // } 
+    System.out.println("Sensor position"+ sensorPosition);
+
+  }
+  public void shootMode(){
+
+    
+    // Constants.setpointWomf = 6;
+    // Constants.setpointShoot = 25;
+    Constants.setpointShoot = -14;
 
     double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
     double error = Constants.setpointShoot - sensorPosition;
