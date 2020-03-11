@@ -16,9 +16,9 @@ public class StopCompressorCommand extends CommandBase {
    */
   PnuematicSubsystem pnuematicSubsystem;
 
-  public StopCompressorCommand(PnuematicSubsystem pnuematicSubsystem) {
-    this.pnuematicSubsystem = pnuematicSubsystem;
-    addRequirements(this.pnuematicSubsystem);
+  public StopCompressorCommand(PnuematicSubsystem subsystem) {
+    pnuematicSubsystem = subsystem;
+    addRequirements(pnuematicSubsystem);
   }
 
   // Called when the command is initially scheduled.

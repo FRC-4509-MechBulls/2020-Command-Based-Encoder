@@ -59,7 +59,7 @@ public class AutoCommand extends CommandBase {
     // shootingGroup.execute();
     if (timer.get() < 10) {
       cannonTiltSubsystem.shootMode();
-      intakeAndShootSubsystem.enable(0.0,-.75);
+      intakeAndShootSubsystem.enable(0.0,-.70);
 
 
     }

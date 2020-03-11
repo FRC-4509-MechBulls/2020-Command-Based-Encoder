@@ -176,7 +176,6 @@ public class Robot extends TimedRobot {
     //   // System.out.println("it is true");
     //   // cannonTiltSubsystem.init();
     // }
-    pnuematicSubsystem.enable();
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
     if (gameData.length() > 0) {
