@@ -59,7 +59,6 @@ public class RobotContainer {
     private void configureButtonBindings() {
         //womfButton, climberButton, cannonShoot, cannonIntake, climbModeCannon, cannonTiltIntake, cannonTiltShoot
         final JoystickButton cannonTiltIntake = new JoystickButton(joshJoystick, 8);
-        final JoystickButton cannonTiltShoot = new JoystickButton(joshJoystick, 11);
         final JoystickButton climberButton = new JoystickButton(joshJoystick, 6);
         final JoystickButton climbModeCannon = new JoystickButton(joshJoystick, 12);
         final JoystickButton cannonShoot = new JoystickButton(joshJoystick, 2);
@@ -73,14 +72,14 @@ public class RobotContainer {
         cannonTiltIntake.whenReleased(new StopTiltCommand(cannonTiltSubsystem));
         climbModeCannon.whenPressed(new CannonClimbMode(cannonTiltSubsystem));
         climbModeCannon.whenReleased(new StopTiltCommand(cannonTiltSubsystem));
-        cannonTiltShoot.whenPressed(new CannonShootMode(cannonTiltSubsystem));
+        // cannonTiltShoot.whenPressed(new CannonShootMode(cannonTiltSubsystem));
         indexerIntake.whenPressed(new IndexIntakeCommand(intakeAndShootSubsystem));
         indexerIntake.whenReleased(new StopIndexCommand(intakeAndShootSubsystem));
         compressor.whenPressed(new StartCompressorCommand(pnuematicSubsystem));
         compressor.whenReleased(new StopCompressorCommand(pnuematicSubsystem));
         // cannonTiltShoot.whenReleased(new StopTiltCommand(cannonTiltSubsystem));
-        cannonShoot.whenPressed(new ShooterOnCommand(intakeAndShootSubsystem));
-        cannonShoot.whenReleased(new IntakeOffCommand(intakeAndShootSubsystem));
+        cannonShoot.whenPressed(new ShooterOnCommand(intakeAndShootSubsystem).alongWith(new CannonShootMode(cannonTiltSubsystem)));
+        cannonShoot.whenReleased(new IntakeOffCommand(intakeAndShootSubsystem).alongWith(new StopTiltCommand(cannonTiltSubsystem)));
         cannonIntake.whenPressed(new IntakeCommand(intakeAndShootSubsystem));
         cannonIntake.whenReleased(new StopTiltCommand(cannonTiltSubsystem).alongWith(new IntakeOffCommand(intakeAndShootSubsystem)));
         indexerShoot.whenPressed(new IndexShooterCommand(intakeAndShootSubsystem));
