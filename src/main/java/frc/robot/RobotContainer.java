@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.climber.ClimberCommand;
 import frc.robot.commands.climber.TurnOffClimberCommand;
 import frc.robot.commands.driving.DirectDriveCommand;
+import frc.robot.commands.index.IndexIntakeCommand;
 import frc.robot.commands.index.IndexShooterCommand;
 import frc.robot.commands.index.StopIndexCommand;
 import frc.robot.commands.intake.IntakeCommand;
@@ -21,12 +22,12 @@ import frc.robot.subsystems.IntakeAndShootSubsystem;
 import frc.robot.subsystems.PnuematicSubsystem;
 import frc.robot.subsystems.WomfSubsystem;
 
-
 public class RobotContainer {
 
-    //public XboxController1 controller1;
+    // public XboxController1 controller1;
     Joystick joshJoystick = new Joystick(2);
-    // XboxController controller1 = new XboxController(Constants.XBOX_CONTROLLER_1_PORT);
+    // XboxController controller1 = new
+    // XboxController(Constants.XBOX_CONTROLLER_1_PORT);
     Joystick zachRightJoystick = new Joystick(0);
     Joystick zachLeftJoystick = new Joystick(1);
 
@@ -36,24 +37,22 @@ public class RobotContainer {
     IntakeAndShootSubsystem intakeAndShootSubsystem = new IntakeAndShootSubsystem();
     WomfSubsystem womfSubsystem = new WomfSubsystem();
     CannonTiltSubsystem cannonTiltSubsystem = new CannonTiltSubsystem();
-    public RobotContainer(){
+
+    public RobotContainer() {
         configureButtonBindings();
 
         drivingSubsystem.setDefaultCommand(
-            new DirectDriveCommand(
-                drivingSubsystem,
-                () -> getLeftDrive(),
-                () -> getRightDrive()));
-       
+                new DirectDriveCommand(drivingSubsystem, () -> getLeftDrive(), () -> getRightDrive()));
+
     }
 
     public double getRightDrive() {
         return zachRightJoystick.getY();
     }
-    public double getLeftDrive() {
-		return zachLeftJoystick.getY();
-	}
 
+    public double getLeftDrive() {
+        return zachLeftJoystick.getY();
+    }
 
     private void configureButtonBindings() {
         //womfButton, climberButton, cannonShoot, cannonIntake, climbModeCannon, cannonTiltIntake, cannonTiltShoot
@@ -64,7 +63,7 @@ public class RobotContainer {
         final JoystickButton cannonShoot = new JoystickButton(joshJoystick, 2);
         final JoystickButton cannonIntake= new JoystickButton(joshJoystick, 7);
         final JoystickButton indexerShoot= new JoystickButton(joshJoystick, 1);
-        
+        final JoystickButton indexerIntake = new JoystickButton(joshJoystick, 9);
         climberButton.whenPressed(new ClimberCommand(climberSubsystem));
         climberButton.whenReleased(new TurnOffClimberCommand(climberSubsystem));
         cannonTiltIntake.whenPressed(new CannonIntakeMode(cannonTiltSubsystem));
@@ -72,6 +71,8 @@ public class RobotContainer {
         climbModeCannon.whenPressed(new CannonClimbMode(cannonTiltSubsystem));
         climbModeCannon.whenReleased(new StopTiltCommand(cannonTiltSubsystem));
         cannonTiltShoot.whenPressed(new CannonShootMode(cannonTiltSubsystem));
+        indexerIntake.whenPressed(new IndexIntakeCommand(intakeAndShootSubsystem));
+        indexerIntake.whenReleased(new StopIndexCommand(intakeAndShootSubsystem));
         // cannonTiltShoot.whenReleased(new StopTiltCommand(cannonTiltSubsystem));
         cannonShoot.whenPressed(new ShooterOnCommand(intakeAndShootSubsystem));
         cannonShoot.whenReleased(new IntakeOffCommand(intakeAndShootSubsystem));

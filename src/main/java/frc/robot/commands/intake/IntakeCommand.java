@@ -7,6 +7,7 @@
 
 package frc.robot.commands.intake;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeAndShootSubsystem;
 
@@ -16,6 +17,7 @@ public class IntakeCommand extends CommandBase {
    * Creates a new IntakeCommand.
    */
   IntakeAndShootSubsystem intakeAndShootSubsystem;
+
   public IntakeCommand(IntakeAndShootSubsystem subsystem) {
     intakeAndShootSubsystem = subsystem;
 
@@ -36,6 +38,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     intakeAndShootSubsystem.enable(1.0,0.6); 
+ 
 
   }
 
