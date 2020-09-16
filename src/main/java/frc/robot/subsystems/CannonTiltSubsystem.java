@@ -20,14 +20,13 @@ public class CannonTiltSubsystem extends SubsystemBase {
    * Creates a new CannonTiltSubsystem.
    */
   public static WPI_TalonSRX cannonMotor = new WPI_TalonSRX(15);
-  double errorSum = 0;
   double lastTimestamp = 0;
   double lastError = 0;
   public CannonTiltSubsystem() {
 
   }
   public void init(){
-    errorSum = 0;
+    Constants.errorSumShoot = 0;
     lastError = 0;
     lastTimestamp = Timer.getFPGATimestamp();
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -39,46 +38,80 @@ public class CannonTiltSubsystem extends SubsystemBase {
     cannonMotor.configClosedloopRamp(0.2);
     cannonMotor.configNominalOutputForward(0, 0);
     cannonMotor.configNominalOutputReverse(0, 0);
-    cannonMotor.configPeakOutputForward(1, 0);
-    cannonMotor.configPeakOutputReverse(-1, 0);
+
     cannonMotor.setSensorPhase(true);
     cannonMotor.configReverseSoftLimitThreshold((int) (0 / Constants.kTick2Feet4Womf), 10);
     cannonMotor.configForwardSoftLimitThreshold((int) (175 / Constants.kTick2Feet4Womf), 10);
     
   }
+  public void shootModeAuto(){
+
+    
+    // Constants.setpointWomf = 6;
+    // Constants.setpointShoot = 25;
+    Constants.setpointShoot = -15;
+
+    double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
+    double error = Constants.setpointShoot - sensorPosition;
+    double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
+    if (Math.abs(error) < Constants.iLimitShoot) {
+      Constants.errorSumShoot += error * dt;
+    }
+    double errorRate = (error - Constants.lastErrorShoot) / dt;
+    // + Constants.kDShoot * errorRate
+
+    double outputSpeed = 0.75*(Constants.kPShoot * error);
+    cannonMotor.set(-outputSpeed);
+    Constants.lastTimestampShoot = Timer.getFPGATimestamp();
+    Constants.lastErrorShoot = error;
+    // If error goes out of bounds, errorSum becomes 0, not tested
+    // if (error >= 1 || error <= -1) { 
+    //   Constants.errorSumShoot = 0;
+    // } 
+    System.out.println("Sensor position"+ sensorPosition);
+
+  }
   public void shootMode(){
+
     
     // Constants.setpointWomf = 6;
     // Constants.setpointShoot = 25;
     Constants.setpointShoot = -14;
 
-    double sensorPosition = cannonMotor.getSelectedSensorPosition(0);
+    double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
     double error = Constants.setpointShoot - sensorPosition;
     double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
     if (Math.abs(error) < Constants.iLimitShoot) {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
-    double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
+    // + Constants.kDShoot * errorRate
+
+    double outputSpeed = 0.75*(Constants.kPShoot * error);
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
     Constants.lastErrorShoot = error;
-    System.out.println(sensorPosition);
+    // If error goes out of bounds, errorSum becomes 0, not tested
+    // if (error >= 1 || error <= -1) { 
+    //   Constants.errorSumShoot = 0;
+    // } 
+    System.out.println("Sensor position"+ sensorPosition);
+
   }
   public void climbMode(){
     
     // Constants.setpointWomf = 6;
     // Constants.setpointShoot = 25;
-    Constants.setpointShoot = 0.1;
+    Constants.setpointShoot = 0.0;
 
-    double sensorPosition = cannonMotor.getSelectedSensorPosition(0);
+    double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
     double error = Constants.setpointShoot - sensorPosition;
     double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
     if (Math.abs(error) < Constants.iLimitShoot) {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
-    double outputSpeed = Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate;
+    double outputSpeed = 0.75*(Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate);
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
     Constants.lastErrorShoot = error;
@@ -87,9 +120,9 @@ public class CannonTiltSubsystem extends SubsystemBase {
 
   public void womfMode(){
 
-      Constants.setpointShoot = -15;
+      Constants.setpointShoot = -14;
 
-      double sensorPosition = cannonMotor.getSelectedSensorPosition(0);
+      double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
       double error = Constants.setpointShoot - sensorPosition;
       double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
       if (Math.abs(error) < Constants.iLimitShoot) {
@@ -105,16 +138,16 @@ public class CannonTiltSubsystem extends SubsystemBase {
    
   
   public void setIntake(){
-    Constants.setpointShoot = -50;
+    Constants.setpointShoot = -45;
 
-    double sensorPosition = cannonMotor.getSelectedSensorPosition(0);
+    double sensorPosition = cannonMotor.getSelectedSensorPosition(0) * Constants.kCannonTick2Deg;
     double error = Constants.setpointShoot - sensorPosition;
     double dt = Timer.getFPGATimestamp() - Constants.lastTimestampShoot;
     if (Math.abs(error) < Constants.iLimitShoot) {
       Constants.errorSumShoot += error * dt;
     }
     double errorRate = (error - Constants.lastErrorShoot) / dt;
-    double outputSpeed = 0.5*(Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate);
+    double outputSpeed = 0.75*(Constants.kPShoot * error + Constants.kIShoot * Constants.errorSumShoot + Constants.kDShoot * errorRate);
     cannonMotor.set(-outputSpeed);
     Constants.lastTimestampShoot = Timer.getFPGATimestamp();
     Constants.lastErrorShoot = error;

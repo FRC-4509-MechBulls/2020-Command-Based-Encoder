@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.CannonTiltSubsystem;
 import frc.robot.subsystems.DrivingSubsystem;
 import frc.robot.subsystems.IntakeAndShootSubsystem;
+import frc.robot.commands.index.IndexShooterCommand;
 import frc.robot.commands.shooter.ShooterOnCommand;
 import frc.robot.commands.tilt.CannonShootMode;
 
@@ -49,16 +50,16 @@ public class AutoCommand extends CommandBase {
   @Override
   public void execute() {
     // SequentialCommandGroup shootingGroup = new SequentialCommandGroup(
-    //     new CannonShootMode(cannonTiltSubsystem).andThen(new ShooterOnCommand(intakeAndShootSubsystem)));
+    //     new CannonShootMode(cannonTiltSubsystem).andThen(new ShooterOnCommand(intakeAndShootSubsystem).andThen(new IndexShooterCommand(intakeAndShootSubsystem))));
 
     // SequentialCommandGroup shootingGroup = new SequentialCommandGroup(
     // new ShooterOnCommand(intakeAndShootSubsystem));
 
     // intakeAndShootSubsystem.enable(0.0, -1);
-
+    // shootingGroup.execute();
     if (timer.get() < 10) {
-      cannonTiltSubsystem.shootMode();
-      intakeAndShootSubsystem.enable(0.0,-.95);
+      cannonTiltSubsystem.shootModeAuto();
+      intakeAndShootSubsystem.enable(0.0,-.70);
 
 
     }
@@ -69,14 +70,17 @@ public class AutoCommand extends CommandBase {
     // // while (timer.get() < 8) {
     // shootingGroup.execute();
     // // }
-    if (timer.get() > 10) {
-      drivingSubsystem.drive.arcadeDrive(.5, 0);// drive straight at half
-    }
+    // if (timer.get() > 10) {
+    //   drivingSubsystem.drive.arcadeDrive(.5, 0);// drive straight at half
+    // }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    cannonTiltSubsystem.stop();
+    intakeAndShootSubsystem.enable(0.0, 0.0);
+    intakeAndShootSubsystem.index(0.0);
   }
 
   // Returns true when the command should end.
