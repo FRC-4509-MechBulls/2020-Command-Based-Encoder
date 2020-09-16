@@ -16,7 +16,6 @@ public class IndexIntakeCommand extends CommandBase {
    * Creates a new IndexIntakeCommand.
    */
   IntakeAndShootSubsystem intakeAndShootSubsystem;
-  DigitalInput irSensor = new DigitalInput(0);
   public IndexIntakeCommand(IntakeAndShootSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     intakeAndShootSubsystem = subsystem;
@@ -31,11 +30,7 @@ public class IndexIntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(irSensor.get()){
-    intakeAndShootSubsystem.index(1.0);}
-    else if(!irSensor.get()){
-      intakeAndShootSubsystem.index(0.0);
-    }
+      intakeAndShootSubsystem.index(1.0);
   }
 
   // Called once the command ends or is interrupted.

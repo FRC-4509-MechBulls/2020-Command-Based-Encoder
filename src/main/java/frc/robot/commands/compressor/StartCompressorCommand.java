@@ -15,9 +15,9 @@ public class StartCompressorCommand extends CommandBase {
    * Creates a new CompressorCommand.
    */
   PnuematicSubsystem pnuematicSubsystem;
-  public StartCompressorCommand(PnuematicSubsystem pnuematicSubsytem) {
-    this.pnuematicSubsystem = pnuematicSubsystem;
-    addRequirements(this.pnuematicSubsystem);
+  public StartCompressorCommand(PnuematicSubsystem subsystem) {
+    pnuematicSubsystem = subsystem;
+    addRequirements(pnuematicSubsystem);
   }
 
   // Called when the command is initially scheduled.
