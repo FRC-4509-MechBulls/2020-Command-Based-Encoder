@@ -7,10 +7,7 @@
 
 package frc.robot.commands.tilt;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.CannonTiltSubsystem;
 
 public class CannonIntakeMode extends CommandBase {

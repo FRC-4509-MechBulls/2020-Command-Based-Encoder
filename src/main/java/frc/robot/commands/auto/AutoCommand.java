@@ -70,9 +70,9 @@ public class AutoCommand extends CommandBase {
     // // while (timer.get() < 8) {
     // shootingGroup.execute();
     // // }
-    if (timer.get() > 10) {
-      drivingSubsystem.drive.arcadeDrive(.5, 0);// drive straight at half
-    }
+    // if (timer.get() > 10) {
+    //   drivingSubsystem.drive.arcadeDrive(.5, 0);// drive straight at half
+    // }
   }
 
   // Called once the command ends or is interrupted.

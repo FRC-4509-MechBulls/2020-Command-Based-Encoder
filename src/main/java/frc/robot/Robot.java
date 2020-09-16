@@ -118,7 +118,7 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().run();
 
-    // auto.schedule();
+    //auto.schedule();
     if (auto != null) auto.schedule();
     if(auto.isFinished() == true){
       auto.cancel();

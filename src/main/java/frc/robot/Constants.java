@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class Constants {
 
 
-
 	public static final int LEFT_FRONT_DRIVE_TALON_PORT  = 3;
 	public static final int LEFT_BACK_DRIVE_TALON_PORT   = 6;
 	public static final int RIGHT_FRONT_DRIVE_TALON_PORT = 11;
@@ -54,10 +53,8 @@ public class Constants {
 	public static final double iLimitShoot = 1;
 
 	public static final Compressor robotCompressor = new Compressor();
-	public static final DigitalInput limitSwitch = new DigitalInput(1);
 	
 
-	
 
 
 }
